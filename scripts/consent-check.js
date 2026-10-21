@@ -2,15 +2,17 @@
  * Cookiebot consent integration.
  *
  * Loaded in the delayed phase (see loadDelayed() in scripts.js), so the banner
- * renders a few seconds after page load and stays off the critical path.
+ * renders after the page has loaded and stays off the critical path.
  * Consent-dependent code (analytics, martech, etc.) lives in consented.js and
  * is imported once, only after the visitor grants statistics or marketing
- * consent.
+ * consent. The banner's WKND theme lives in styles/cookiebot.css.
  *
  * For testing, a query parameter short-circuits the banner:
  *   ?consent=accept   grant consent (loads consented.js)
  *   ?consent=decline  decline consent
  */
+import { loadCSS } from './aem.js';
+
 const COOKIEBOT_SRC = 'https://consent.cookiebot.com/uc.js';
 // Cookiebot Domain Group ID (Cookiebot > Settings > Your scripts > data-cbid)
 const COOKIEBOT_CBID = '1d5d1290-0a6c-47a7-bfd0-2547e91a819e';
@@ -46,7 +48,7 @@ function onCookiebotConsent() {
   updateConsent(!!(consent.statistics || consent.marketing));
 }
 
-function loadCookiebot() {
+async function loadCookiebot() {
   if (document.getElementById('Cookiebot')) return;
   if (!COOKIEBOT_CBID || COOKIEBOT_CBID === 'your-cookiebot-id') {
     // eslint-disable-next-line no-console
@@ -57,6 +59,9 @@ function loadCookiebot() {
   window.addEventListener('CookiebotOnConsentReady', onCookiebotConsent);
   window.addEventListener('CookiebotOnAccept', onCookiebotConsent);
   window.addEventListener('CookiebotOnDecline', onCookiebotConsent);
+
+  // theme first, so the banner never flashes in Cookiebot's default styling
+  await loadCSS(`${window.hlx.codeBasePath}/styles/cookiebot.css`);
 
   const script = document.createElement('script');
   script.id = 'Cookiebot';

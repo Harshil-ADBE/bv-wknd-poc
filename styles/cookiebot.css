@@ -1,0 +1,144 @@
+/*
+ * cookiebot.css — WKND theme for the Cookiebot consent banner.
+ *
+ * Loaded by scripts/consent-check.js alongside Cookiebot. Cookiebot injects its
+ * own styles as adopted stylesheets, which cascade after ours, so every rule
+ * is prefixed with `body #CybotCookiebotDialog` to out-rank its ID selectors.
+ * Layout (bottom bar / pop-up) is chosen in the Cookiebot manager, not here.
+ */
+
+/* IDs and classes below are Cookiebot's own markup, so they can't follow our
+   kebab-case naming; rules are grouped by component rather than specificity. */
+/* stylelint-disable selector-id-pattern, selector-class-pattern, no-descending-specificity */
+
+/* dialog: flat, square, WKND fonts and colors */
+body #CybotCookiebotDialog {
+  border-radius: 0;
+  border-top: 4px solid var(--accent-color);
+  background-color: var(--background-color);
+  box-shadow: 0 -8px 32px rgb(0 0 0 / 20%);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+}
+
+body #CybotCookiebotDialog #CybotCookiebotDialogBodyContentTitle {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* links: dark text with the yellow underline accent */
+body #CybotCookiebotDialog a,
+body #CybotCookiebotDialog.CybotEdge #CybotCookiebotDialogBodyEdgeMoreDetails a {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+body #CybotCookiebotDialog a:hover {
+  color: var(--text-color);
+  text-decoration-color: var(--text-color);
+}
+
+/* the Cookiebot logo link is an image, not text */
+body #CybotCookiebotDialog #CybotCookiebotDialogPoweredbyCybot,
+body #CybotCookiebotDialog #CybotCookiebotDialogPoweredbyCybot a {
+  text-decoration: none;
+}
+
+/* tabs (Consent / Details / About) */
+body #CybotCookiebotDialog #CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink {
+  color: var(--text-color);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+body #CybotCookiebotDialog #CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink:hover {
+  color: var(--text-color);
+}
+
+/* active tab: the same thick yellow underline as WKND section titles */
+body #CybotCookiebotDialog #CybotCookiebotDialogNav .CybotCookiebotDialogNavItemLink.CybotCookiebotDialogActive {
+  border-bottom: 4px solid var(--accent-color);
+  color: var(--text-color);
+}
+
+body #CybotCookiebotDialog a:hover::after,
+body #CybotCookiebotDialog a:hover::before,
+body #CybotCookiebotDialog button:hover::after,
+body #CybotCookiebotDialog button:hover::before {
+  border-color: var(--text-color);
+}
+
+/* buttons: square, uppercase, same size so Deny is as easy as Allow */
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter .CybotCookiebotDialogBodyButton {
+  border: 2px solid var(--text-color);
+  border-radius: 0;
+  padding: 14px 24px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  opacity: 1;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter .CybotCookiebotDialogBodyButton:hover,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter .CybotCookiebotDialogBodyButton:focus-visible {
+  border-color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* primary: the signature WKND yellow */
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyButtonAccept,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonAccept {
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll:hover,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll:focus-visible,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyButtonAccept:hover,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyButtonAccept:focus-visible,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonAccept:hover,
+body #CybotCookiebotDialog #CybotCookiebotDialogFooter #CybotCookiebotDialogBodyLevelButtonAccept:focus-visible {
+  border-color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--accent-color);
+}
+
+/* keyboard focus stays clearly visible */
+body #CybotCookiebotDialog button:focus-visible,
+body #CybotCookiebotDialog a:focus-visible,
+body #CybotCookiebotDialog input:focus-visible + .CybotCookiebotDialogBodyLevelButtonSlider {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+/* category toggles: grey off, dark with a yellow knob when on */
+body #CybotCookiebotDialog .CybotCookiebotDialogBodyLevelButtonSlider {
+  background-color: #767676;
+}
+
+body #CybotCookiebotDialog input:checked + .CybotCookiebotDialogBodyLevelButtonSlider {
+  background-color: var(--text-color);
+}
+
+body #CybotCookiebotDialog input:checked + .CybotCookiebotDialogBodyLevelButtonSlider::before {
+  background-color: var(--accent-color);
+}
+
+/* "Necessary" is always on and can't be changed */
+body #CybotCookiebotDialog input:disabled + .CybotCookiebotDialogBodyLevelButtonSlider {
+  opacity: 0.5;
+}
