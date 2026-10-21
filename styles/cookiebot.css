@@ -16,7 +16,7 @@ body #CybotCookiebotDialog {
   border-radius: 0;
   border-top: 4px solid var(--accent-color);
   background-color: var(--background-color);
-  box-shadow: 0 -8px 32px rgb(0 0 0 / 20%);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);
   color: var(--text-color);
   font-family: var(--body-font-family);
 }
